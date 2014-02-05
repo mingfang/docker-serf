@@ -1,0 +1,5 @@
+#!/bin/sh
+
+JOIN=$1
+docker run -e JOIN="$JOIN" -rm=true -i -t serf /bin/bash
+

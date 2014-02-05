@@ -1,0 +1,5 @@
+#!/bin/sh
+
+JOIN=$1
+echo $JOIN
+docker run -d -e JOIN=$JOIN serf
