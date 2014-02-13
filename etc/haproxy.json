@@ -1,0 +1,10 @@
+{
+  "bind": "0.0.0.0:7946",
+  "start_join": ["172.17.0.2:7946"],
+  "leave_on_terminate": true,
+  "tags":{
+    "role": "web",
+    "frontend": "    acl is_www hdr(host) -i www;    use_backend www if is_www",
+    "backend": "backend www;    server $HOSTNAME $HOSTNAME:$PORT check"
+  }
+}

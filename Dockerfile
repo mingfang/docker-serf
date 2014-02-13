@@ -9,7 +9,6 @@ RUN dpkg-divert --local --rename --add /sbin/initctl && ln -s /bin/true /sbin/in
 
 #Supervisord
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y supervisor && mkdir -p /var/log/supervisor
-ADD supervisord-ssh.conf /etc/supervisor/conf.d/
 CMD ["/usr/bin/supervisord", "-n"]
 
 #SSHD
@@ -24,10 +23,11 @@ RUN wget https://dl.bintray.com/mitchellh/serf/0.4.1_linux_amd64.zip && \
     unzip 0.4*.zip && \
     rm 0.4*.zip
 RUN mv serf /usr/bin/
-ADD supervisord-serf.conf /etc/supervisor/conf.d/
-ADD serf-agent.sh /
-ADD serf-join.sh /
-RUN chmod +x serf*.sh
-ENV BIND 0.0.0.0:7946
+
+#Configuration
+
+ADD . /docker-serf
+RUN ln -s /docker-serf/etc/supervisord-serf.conf /etc/supervisor/conf.d/supervisord-serf.conf
+RUN ln -s /docker-serf/etc/supervisord-ssh.conf /etc/supervisor/conf.d/supervisord-ssh.conf
  
 EXPOSE 22 7946
