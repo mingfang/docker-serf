@@ -29,5 +29,10 @@ RUN mv serf /usr/bin/
 ADD . /docker-serf
 RUN ln -s /docker-serf/etc/supervisord-serf.conf /etc/supervisor/conf.d/supervisord-serf.conf
 RUN ln -s /docker-serf/etc/supervisord-ssh.conf /etc/supervisor/conf.d/supervisord-ssh.conf
+
+#Apache Example
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y apache2
+RUN echo "Serf works!" > /var/www/index.html
+RUN ln -s /docker-serf/etc/supervisord-apache.conf /etc/supervisor/conf.d/supervisord-apache.conf
  
 EXPOSE 22 7946
