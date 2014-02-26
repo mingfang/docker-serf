@@ -19,7 +19,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y openssh-server &&	mkdir /v
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y vim less net-tools inetutils-ping curl git telnet nmap socat dnsutils netcat tree htop unzip sudo
 
 #Serf
-RUN wget https://dl.bintray.com/mitchellh/serf/0.4.1_linux_amd64.zip && \
+RUN wget https://dl.bintray.com/mitchellh/serf/0.4.5_linux_amd64.zip && \
     unzip 0.4*.zip && \
     rm 0.4*.zip
 RUN mv serf /usr/bin/
